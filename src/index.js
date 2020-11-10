@@ -22,7 +22,7 @@ function handleServer(req, res) {
     res.end();
   } else {
     res.statusCode = 404;
-    res.write("Bad request");
+    res.write("Page Not Found");
     res.end();
   }
   
