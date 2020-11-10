@@ -5,27 +5,26 @@ const httpServer = http.createServer(handleServer).listen(8081);
 
 function handleServer(req, res) {
 
-    if(req.url === "/welcome"){
-        res.write('Welcome to Dominos!');
-        res.end();
-        return;
-    }
-    if(req.url === "/contact"){
-        let obj = {
-            phone: '18602100000',
-            email: 'guestcaredominos@jublfood.com'
-            };
-  
-        res.write(JSON.stringify(obj));
-        res.end();
-        return;
-    }
-    
-        res.writeHead(404, {'Content-Type': 'text/html'});
-        //res.writeHead(404);
-        res.write("status 404");
-        res.end(); 
-    return;
+    if (req.url === "/welcome") {
+    res.statusCode = 200;
+    res.setHeader("content-Type", "text/plain");
+    res.write("Welcome to Dominos!");
+    res.end();
+  } else if (req.url === "/contact") {
+    res.statusCode = 200;
+    res.setHeader("content-Type", "application/json");
+    res.write(
+      JSON.stringify({
+        phone: "18602100000",
+        email: "guestcaredominos@jublfood.com"
+      })
+    );
+    res.end();
+  } else {
+    res.statusCode = 404;
+    res.write("page not found");
+    res.end();
+  }
   
 }
 
